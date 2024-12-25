@@ -84,32 +84,8 @@ pre-build:
 	# Build filepicker
 	cd ${WRKSRC}/filepicker && sh ./build.sh
 	# Build vdhcoapp (JavaScript)
-	if ! [ -x "$(command -v esbuild)" ]; then
-	  log "Installing esbuild"
-	  npm install -g esbuild
-	fi
-	if ! [ -x "$(command -v pkg)" ]; then
-	  log "Installing pkg"
-	  npm install -g pkg
-	fi
-	if ! [ -x "$(command -v ejs)" ]; then
-	  log "Installing ejs"
-	  npm install -g ejs
-	fi
-	if [ ! -d "${WRKSRC}/app/node_modules" ]; then
-	  (cd ${WRKSRC}/app/ ; npm install)
-	fi
-	eval $(yq ${WRKSRC}/config.toml -o shell)
-	log "Creating config.json"
-	yq . -o yaml ${WRKSRC}/config.toml |\
-	  yq e ".target.os = \"freebsd\"" |\
-	  yq e ".target.arch = \"${ARCH}\"" |\
-	  yq e ".target.node = \"${PKG_NODE_VER}\"" -o json \
-	  > ${WRKSRC}/dist/config.json
-	declare -a opts=("--target=esnext" \
-	"--banner:js=const _importMetaUrl=require('url').pathToFileURL(__filename)" \
-	"--define:import.meta.url=_importMetaUrl")
-	declare -a opts=("${WRKSRC}/dist/bundled.js")
+	cd ${WRKSRC} && sh ./build.sh --skip-packaging --skip-signing --skip-notary --target freebsd-${ARCH}
+
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
 	# build patched node for pkg
 	cd ${WRKDIR}/node-v${PKG_NODE_VER} && \
