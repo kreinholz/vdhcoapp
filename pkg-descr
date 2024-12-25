@@ -1,0 +1,7 @@
+DownloadHelper CoApp is a multi-platform (Windows, Mac, Linux) application providing the Video DownloadHelper browser add-on with a set of extra features not available direclty from the add-on:
+
+- file writing API
+- launching default video player application on a data file
+- a build of the ffmpeg video converter
+
+DownloadHelper CoApp complies with the native messaging protocol and is not intended to be used direclty from the command line.
