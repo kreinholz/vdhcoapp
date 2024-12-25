@@ -43,15 +43,17 @@
  
  if [ $publish == 1 ]; then
    files=(
-@@ -329,7 +334,7 @@ if [ ! $skip_bundling == 1 ]; then
+@@ -329,8 +334,8 @@ if [ ! $skip_bundling == 1 ]; then
    fi
  
    log "Bundling Node binary with code"
 -  pkg "${opts[@]}" \
+-    --target node$target_node-$node_os-$node_arch \
 +  npx pkg "${opts[@]}" \
-     --target node$target_node-$node_os-$node_arch \
++    --target node$target_node-$node_os \
      --output $target_dist_dir/$package_binary_name$exe_extension
  else
+   log "Skipping bundling"
 @@ -346,59 +351,33 @@ cp $dist_dir/$filepicker_target $target_dist_dir/filep
  
  cp $dist_dir/$filepicker_target $target_dist_dir/filepicker$exe_extension

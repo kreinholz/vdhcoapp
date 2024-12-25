@@ -84,7 +84,7 @@ pre-build:
 	# Build filepicker
 	cd ${WRKSRC}/filepicker && sh ./build.sh
 	# Build vdhcoapp (JavaScript)
-	cd ${WRKSRC} && sh ./build.sh --skip-packaging --skip-signing --skip-notary --target freebsd-${ARCH}
+	cd ${WRKSRC} && ./build.sh --skip-packaging --skip-signing --skip-notary --target freebsd-${ARCH}
 
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
 	# build patched node for pkg
