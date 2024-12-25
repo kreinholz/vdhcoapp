@@ -82,11 +82,7 @@ post-patch:
 
 pre-build:
 	# Build filepicker
-	cd ${WRKSRC}/filepicker
-	rm -rf ${WRKSRC}/dist
-	mkdir -p ${WRKSRC}/dist
-	cargo -C ${WRKSRC}/filepicker build --target ${ARCH}-unknown-freebsd --release
-	cp ./target/${ARCH}-unknown-freebsd/release/filepicker ${WRKSRC}/dist/filepicker-freebsd-${ARCH}
+	cd ${WRKSRC}/filepicker && sh ./build.sh
 	# Build vdhcoapp (JavaScript)
 	if ! [ -x "$(command -v esbuild)" ]; then
 	  log "Installing esbuild"
