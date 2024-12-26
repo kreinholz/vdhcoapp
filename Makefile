@@ -22,7 +22,7 @@ BUILD_DEPENDS=	yq:textproc/go-yq \
 		pkg-config:devel/pkgconf \
 		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
-USES=		nodejs:18,build pkgconfig
+USES=		nodejs:18,build pkgconfig compiler:c++11-lib gmake localbase python:build shebangfix
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	aclap-dev
@@ -39,11 +39,11 @@ OPTIONS_DEFINE=	DOCS
 
 PKG_NODE_VER=	18.20.4
 PKG_FETCH_VER=	3.5
-PKG_NODE_CONFIGURE_ARGS=--format=cjs \
-			--bundle --platform=node \
-			--tree-shaking=true \
-			--alias:electron=electron2 \
-			--outfile=dist/bundled.js
+PKG_NODE_CONFIGURE_ARGS=--shared-brotli \
+			--shared-cares \
+			--shared-libuv \
+			--shared-nghttp2 \
+			--shared-zlib
 NODE_ARCH=	${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 pre-fetch:
