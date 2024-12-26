@@ -33,28 +33,44 @@
  if [ $target_os == "win7" ]; then
    node_os="windows"
    ffmpeg_target=ffmpeg-$package_ffmpeg_build_version-windows-$target_arch
-@@ -193,6 +195,9 @@ fi
+@@ -193,6 +195,10 @@ fi
  if [ $target == "linux-x86_64" ]; then
    deb_arch="amd64"
  fi
 +if [ $target == "freebsd-amd64" ]; then
 +  node_os="freebsd"
++  filepicker_target=filepicker-freebsd-$target_arch$exe_extension
 +fi
  
  if [ $publish == 1 ]; then
    files=(
-@@ -329,8 +334,8 @@ if [ ! $skip_bundling == 1 ]; then
+@@ -328,77 +334,50 @@ if [ ! $skip_bundling == 1 ]; then
+     declare -a opts=("$dist_dir/bundled.js")
    fi
  
-   log "Bundling Node binary with code"
+-  log "Bundling Node binary with code"
 -  pkg "${opts[@]}" \
 -    --target node$target_node-$node_os-$node_arch \
-+  npx pkg "${opts[@]}" \
-+    --target node$target_node-$node_os \
-     --output $target_dist_dir/$package_binary_name$exe_extension
+-    --output $target_dist_dir/$package_binary_name$exe_extension
++#  log "Bundling Node binary with code"
++#  npx pkg "${opts[@]}" \
++#    --target node$target_node-$node_os \
++#    --output $target_dist_dir/$package_binary_name$exe_extension
  else
    log "Skipping bundling"
-@@ -346,59 +351,33 @@ cp $dist_dir/$filepicker_target $target_dist_dir/filep
+ fi
+ 
++cp filepicker/dist/$filepicker_target $dist_dir
++
+ if [[ ! -f $dist_dir/$filepicker_target ]]; then
+-  log "Retrieving filepicker"
+-  filepicker_url_base="https://github.com/paulrouget/static-filepicker/releases/download/"
+-  filepicker_url=$filepicker_url_base/v$package_filepicker_build_version/$filepicker_target
+-  wget -c $filepicker_url -O $dist_dir/$filepicker_target
+-  chmod +x $dist_dir/$filepicker_target
++  log "Could not find filepicker--please ensure filepicker_$target exists in $dist_dir and try again."
++  exit 1
+ fi
  
  cp $dist_dir/$filepicker_target $target_dist_dir/filepicker$exe_extension
  
