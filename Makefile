@@ -86,7 +86,7 @@ pre-build:
 	# Build vdhcoapp (JavaScript)
 	cd ${WRKSRC} && ./build.sh --skip-packaging --skip-signing --skip-notary --target freebsd-${ARCH}
 
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
+	#cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
 	# build patched node for pkg
 	cd ${WRKDIR}/node-v${PKG_NODE_VER} && \
 		${SETENV} ${CONFIGURE_ENV} CC=${CC} CXX=${CXX} ./configure ${PKG_NODE_CONFIGURE_ARGS} && \
@@ -96,7 +96,7 @@ pre-build:
 		${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH}
 	${STRIP_CMD} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH}
 	# rebuild node modules against patched node
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ELECTRON_SKIP_BINARY_DOWNLOAD=1 \
+	cd ${WRKSRC}/app && ${SETENV} ${MAKE_ENV} ELECTRON_SKIP_BINARY_DOWNLOAD=1 \
 		npm rebuild --nodedir=${WRKDIR}/node-v${PKG_NODE_VER} --verbose
 
 do-build:
