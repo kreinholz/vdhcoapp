@@ -22,24 +22,21 @@ BUILD_DEPENDS=	yq:textproc/go-yq \
 		pkg-config:devel/pkgconf \
 		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
-USE_GNOME+=	gtk30 glib20
-
 LIB_DEPENDS=	libuv.so:devel/libuv \
 		libbrotlidec.so:archivers/brotli \
 		libbrotlienc.so:archivers/brotli \
 		libcares.so:dns/c-ares \
-		libnghttp2.so:www/libnghttp2
+		libnghttp2.so:www/libnghttp2 \
+		libgtk-3.so:x11-toolkits/gtk30 \
+		libglib-2.0.so:devel/glib20
 
-USES=		nodejs:18,build pkgconfig compiler:c++11-lib gmake localbase python:build shebangfix gnome
+USES=		nodejs:18,build pkgconfig compiler:c++11-lib gmake localbase python:build shebangfix
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	aclap-dev
 GH_TUPLE?=	paulrouget:static-filepicker:v1.0.1:dist/filepicker
 
-BUILD_WRKSRC=	${WRKSRC}/app/
-
-PLIST_FILES=	dist/vdhcoapp \
-		dist/filepicker
+BUILD_WRKSRC=	${WRKSRC}/app
 
 PORTDOCS=	README.md
 
@@ -77,14 +74,36 @@ pre-fetch:
 		${RM} -r ${WRKDIR}; \
 	fi
 
+post-extract:
+	${MV} ${WRKDIR}/node_modules ${WRKSRC}
+
+post-patch:
+	# apply FreeBSD patches for node
+	for p in ${PATCHDIR}/node/patch-*;do \
+		${PATCH} -s -p0 -d ${WRKDIR}/node-v${PKG_NODE_VER} < $${p}; \
+	done
+	# apply node patch from pkg-fetch
+	${PATCH} -s -p1 -d ${WRKDIR}/node-v${PKG_NODE_VER} < \
+		${WRKSRC}/node_modules/@yao-pkg/pkg-fetch/patches/node.v${PKG_NODE_VER}.cpp.patch
+
+pre-build:
+	# build patched node for @yao-pkg (longest part of build)
+	cd ${WRKDIR}/node-v${PKG_NODE_VER} && \
+		${SETENV} ${CONFIGURE_ENV} CC=${CC} CXX=${CXX} ./configure ${PKG_NODE_CONFIGURE_ARGS} && \
+		${SETENV} ${MAKE_ENV} ${MAKE_CMD} -j ${MAKE_JOBS_NUMBER}
+	${MKDIR} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}
+	${MV} ${WRKDIR}/node-v${PKG_NODE_VER}/out/Release/node \
+		${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH}
+	${STRIP_CMD} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH}
+	# rebuild node modules against patched node
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ELECTRON_SKIP_BINARY_DOWNLOAD=1 \
+		npm rebuild --nodedir=${WRKDIR}/node-v${PKG_NODE_VER} --verbose
+
 do-build:
 	# Build filepicker
 	cd ${WRKSRC}/filepicker && ./build.sh
-	# Build vdhcoapp
+	# Build vdhcoapp and compile into a single executable application
 	cd ${WRKSRC} && ./build.sh --skip-packaging --skip-signing --skip-notary --target freebsd-${ARCH}
-	# Compile vhdcoapp into a single executable application
-#	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} PKG_NODE_PATH=${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH} \
-#		npx pkg --format=cjs --bundle --platform=node --tree-shaking=true --alias:electron=electron2 --target node${NODEJS_VERSION}-freebsd-${NODE_ARCH} --output ./dist/vdhcoapp ./dist/bundled.js
 
 do-install:
 	# don't strip executable since it causes error
