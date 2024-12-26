@@ -20,7 +20,7 @@
  done
  
  case $target in
-+  freebsd-amd64 | \
++  freebsd-%%ARCH%% | \
    linux-i686 | \
    linux-aarch64 | \
    linux-x86_64 | \
@@ -37,7 +37,7 @@
  if [ $target == "linux-x86_64" ]; then
    deb_arch="amd64"
  fi
-+if [ $target == "freebsd-amd64" ]; then
++if [ $target == "freebsd-%%ARCH%%" ]; then
 +  node_os="freebsd"
 +  filepicker_target=filepicker-freebsd-$target_arch$exe_extension
 +fi
@@ -52,7 +52,7 @@
 -  pkg "${opts[@]}" \
 -    --target node$target_node-$node_os-$node_arch \
 +#  log "Bundling Node binary with code"
-+  PKG_NODE_PATH=../.pkg-cache/v3.5/built-v18.20.4-freebsd-x64 npx pkg "${opts[@]}" \
++  PKG_NODE_PATH=%%WRKDIR%%/.pkg-cache/%%PKG_FETCH_VER%%/built-%%PKG_NODE_VER%%-freebsd-%%NODE_ARCH%% npx pkg "${opts[@]}" \
 +    --target node$target_node-$node_os \
      --output $target_dist_dir/$package_binary_name$exe_extension
  else

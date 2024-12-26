@@ -87,6 +87,21 @@ post-patch:
 	# apply node patch from pkg-fetch
 	${PATCH} -s -p1 -d ${WRKDIR}/node-v${PKG_NODE_VER} < \
 		${WRKSRC}/node_modules/@yao-pkg/pkg-fetch/patches/node.v${PKG_NODE_VER}.cpp.patch
+	# Apply substitutions to avoid hardcoding architecture in build scripts
+	@${REINPLACE_CMD} -e 's|%%ARCH%%|${ARCH}|' \
+		${WRKSRC}/build.sh
+	@${REINPLACE_CMD} -e 's|%%NODE_ARCH%%|${NODE_ARCH}|' \
+		${WRKSRC}/build.sh
+	@${REINPLACE_CMD} -e 's|%%PKG_FETCH_VER%%|${PKG_FETCH_VER}|' \
+		${WRKSRC}/build.sh
+	@${REINPLACE_CMD} -e 's|%%PKG_NODE_VER%%|${PKG_NODE_VER}|' \
+		${WRKSRC}/build.sh
+	@${REINPLACE_CMD} -e 's|%%WRKDIR%%|${WRKDIR}|' \
+		${WRKSRC}/build.sh
+	@${REINPLACE_CMD} -e 's|%%ARCH%%|${ARCH}|' \
+		${WRKSRC}/filepicker/build.sh
+	@${REINPLACE_CMD} -e 's|amd64-|x86_64-|' \
+		${WRKSRC}/filepicker/build.sh
 
 pre-build:
 	# build patched node for @yao-pkg (longest part of build)
