@@ -2,8 +2,9 @@ PORTNAME=	vdhcoapp
 DISTVERSIONPREFIX=	v
 DISTVERSION=	2.0.19
 CATEGORIES=	www
-MASTER_SITES=	https://github.com/aclap-dev/vdhcoapp/
-DISTFILES=	node-v${PKG_NODE_VER}${EXTRACT_SUFX}:node \
+MASTER_SITES=	https://github.com/aclap-dev/vdhcoapp/ \
+		https://nodejs.org/dist/v${PKG_NODE_VERSION}/
+DISTFILES=	node-v${PKG_NODE_VER}:${EXTRACT_SUFX} \
 		${PREFETCH_FILE}:prefetch
 
 PREFETCH_FILE=	vdhcoapp-${DISTVERSION}-node_modules.tgz
@@ -47,7 +48,7 @@ NODE_ARCH=	${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 pre-fetch:
 	# Only create the PREFETCH_FILE if not found
-	if [ -f ${DISTDIR}/{PREFETCH_FILE} ]; then \
+	if [ -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${CP} -R ${FILESDIR}/packagejsons/* ${WRKDIR}/node-modules-cache; \
 		cd ${WRKDIR}/node-modules-cache && \
