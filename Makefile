@@ -101,9 +101,7 @@ pre-build:
 		npm rebuild --nodedir=${WRKDIR}/node-v${PKG_NODE_VER} --verbose
 
 do-build:
-	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		npm run build:bit:prod
-	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} \
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} PKG_NODE_PATH=${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH} \
 		npx pkg . --target node${NODEJS_VERSION}-freebsd-${NODE_ARCH} --output ./dist/vdhcoapp
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV}
 
