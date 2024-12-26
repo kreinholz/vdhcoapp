@@ -51,11 +51,10 @@
 -  log "Bundling Node binary with code"
 -  pkg "${opts[@]}" \
 -    --target node$target_node-$node_os-$node_arch \
--    --output $target_dist_dir/$package_binary_name$exe_extension
 +#  log "Bundling Node binary with code"
-+#  npx pkg "${opts[@]}" \
-+#    --target node$target_node-$node_os \
-+#    --output $target_dist_dir/$package_binary_name$exe_extension
++  npx pkg "${opts[@]}" \
++    --target node$target_node-$node_os \
+     --output $target_dist_dir/$package_binary_name$exe_extension
  else
    log "Skipping bundling"
  fi
@@ -104,7 +103,8 @@
      # Variation: No ffmpeg shipped
      # --------------------------------
      cp LICENSE.txt README.md app/node_modules/open/xdg-open \
-       $target_dist_dir/filepicker \
+-      $target_dist_dir/filepicker \
++      $target_dist_dir/$filepicker_target \
        $target_dist_dir/$package_binary_name \
 -      $target_dist_dir/deb/opt/$package_binary_name
  

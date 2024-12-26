@@ -97,11 +97,11 @@ pre-build:
 do-build:
 	# Build filepicker
 	cd ${WRKSRC}/filepicker && ./build.sh
-	# Build vdhcoapp (bundled JavaScript)
+	# Build vdhcoapp
 	cd ${WRKSRC} && ./build.sh --skip-packaging --skip-signing --skip-notary --target freebsd-${ARCH}
 	# Compile vhdcoapp into a single executable application
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} PKG_NODE_PATH=${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH} \
-		npx pkg --format=cjs --bundle --platform=node --tree-shaking=true --alias:electron=electron2 --target node${NODEJS_VERSION}-freebsd-${NODE_ARCH} --output ./dist/vdhcoapp ./dist/bundled.js
+#	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} PKG_NODE_PATH=${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH} \
+#		npx pkg --format=cjs --bundle --platform=node --tree-shaking=true --alias:electron=electron2 --target node${NODEJS_VERSION}-freebsd-${NODE_ARCH} --output ./dist/vdhcoapp ./dist/bundled.js
 
 do-install:
 	# don't strip executable since it causes error
