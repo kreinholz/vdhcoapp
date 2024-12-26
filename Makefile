@@ -22,6 +22,8 @@ BUILD_DEPENDS=	yq:textproc/go-yq \
 		pkg-config:devel/pkgconf \
 		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
+RUN_DEPENDS=	xdg-open:devel/xdg-utils
+
 LIB_DEPENDS=	libuv.so:devel/libuv \
 		libbrotlidec.so:archivers/brotli \
 		libbrotlienc.so:archivers/brotli \
