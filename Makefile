@@ -3,8 +3,8 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	2.0.19
 CATEGORIES=	www
 MASTER_SITES=	https://github.com/aclap-dev/vdhcoapp/ \
-		https://nodejs.org/dist/v${PKG_NODE_VERSION}/
-DISTFILES=	node-v${PKG_NODE_VER}:${EXTRACT_SUFX} \
+		https://nodejs.org/dist/v${PKG_NODE_VER}/:node
+DISTFILES=	node-v${PKG_NODE_VER}${EXTRACT_SUFX}:node \
 		${PREFETCH_FILE}:prefetch
 
 PREFETCH_FILE=	vdhcoapp-${DISTVERSION}-node_modules.tgz
