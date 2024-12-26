@@ -1,0 +1,20 @@
+[
+{ type: install
+  message: <<EMO
+The Video DownloadHelper Companion App has been installed on your machine. However, it still needs to be registered before the Video DownloadHelper browser extension can use it. Usage:
+
+Commands:
+  vdhcoapp install	# register browser JSON files in browser-specific locations.
+  vdhcoapp uninstall	# remove JSON files.
+
+Options:
+  --help	# display commands and options
+  --info	# list extra info from converter
+  --version	# show coapp version
+  --user	# force installation in user mode (automatic if run as non-root user)
+  --system	# force installation system wide (automatic if run as root user)
+
+In order to use the 'Download and convert to' feature in the browser extension, ffmpeg must be installed on the system. multimedia/ffmpeg is available through either Ports or packages.
+EOM
+}
+]
