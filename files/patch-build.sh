@@ -52,7 +52,7 @@
 -  pkg "${opts[@]}" \
 -    --target node$target_node-$node_os-$node_arch \
 +#  log "Bundling Node binary with code"
-+  npx pkg "${opts[@]}" \
++  PKG_NODE_PATH=../.pkg-cache/v3.5/built-v18.20.4-freebsd-x64 npx pkg "${opts[@]}" \
 +    --target node$target_node-$node_os \
      --output $target_dist_dir/$package_binary_name$exe_extension
  else
