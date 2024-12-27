@@ -4,11 +4,7 @@ DISTVERSION=	2.0.19
 CATEGORIES=	www
 MASTER_SITES=	https://github.com/aclap-dev/vdhcoapp/ \
 		https://nodejs.org/dist/v${PKG_NODE_VER}/:node
-DISTFILES=	node-v${PKG_NODE_VER}${EXTRACT_SUFX}:node \
-		${PREFETCH_FILE}:prefetch
-
-PREFETCH_FILE=	vdhcoapp-${DISTVERSION}-node_modules.tgz
-#PREFETCH_TIMESTAMP=	1735144817
+DISTFILES=	node-v${PKG_NODE_VER}${EXTRACT_SUFX}:node
 
 MAINTAINER=	kreinholz@gmail.com
 COMMENT=	Companion Application for Video DownloadHelper browser add-on
@@ -55,29 +51,6 @@ PKG_NODE_CONFIGURE_ARGS=--shared-brotli \
 			--shared-nghttp2 \
 			--shared-zlib
 NODE_ARCH=	${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
-
-pre-fetch:
-	# Only create the PREFETCH_FILE if not found
-	if [ -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
-		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		${CP} -R ${FILESDIR}/packagejsons/* ${WRKDIR}/node-modules-cache; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} HOME=${WRKDIR} \
-			npm ci --ignore-scripts --no-progress --no-audit --no-fund; \
-		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
-			${GREP} -v node_modules | ${XARGS} ${RM} -r; \
-		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${MTREE_CMD} -cbnSp node_modules | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./node_modules:' > node-modules-cache.mtree; \
-		${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PREFETCH_FILE} \
-			@node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
 
 post-extract:
 	${MV} ${WRKDIR}/node_modules ${WRKSRC}
