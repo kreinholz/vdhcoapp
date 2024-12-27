@@ -1,7 +1,7 @@
 [
 { type: install
-  message: <<EMO
-The Video DownloadHelper Companion App has been installed on your machine. However, it still needs to be registered before the Video DownloadHelper browser extension can use it. Usage:
+  message: <<EOM
+The Video DownloadHelper Companion App has been installed on your machine. However, it still needs to be registered before the Video DownloadHelper browser extension can use it.
 
 Commands:
   vdhcoapp install	# register browser JSON files in browser-specific locations.
