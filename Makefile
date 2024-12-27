@@ -16,11 +16,12 @@ WWW=		https://www.downloadhelper.net
 
 LICENSE=	GPLv2
 
+FETCH_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 BUILD_DEPENDS=	yq:textproc/go-yq \
 		bash:shells/bash \
 		cargo:lang/rust \
 		pkg-config:devel/pkgconf \
-		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
+		npm:www/npm${NODEJS_SUFFIX}
 
 RUN_DEPENDS=	xdg-open:devel/xdg-utils
 
@@ -31,6 +32,8 @@ LIB_DEPENDS=	libuv.so:devel/libuv \
 		libnghttp2.so:www/libnghttp2 \
 		libgtk-3.so:x11-toolkits/gtk30 \
 		libglib-2.0.so:devel/glib20
+
+TEST_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 
 USES=		nodejs:18,build pkgconfig compiler:c++11-lib gmake localbase python:build shebangfix
 
