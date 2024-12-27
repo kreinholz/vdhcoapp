@@ -52,7 +52,7 @@
 -  pkg "${opts[@]}" \
 -    --target node$target_node-$node_os-$node_arch \
 +#  log "Bundling Node binary with code"
-+  PKG_NODE_PATH=%%WRKDIR%%/.pkg-cache/%%PKG_FETCH_VER%%/built-%%PKG_NODE_VER%%-freebsd-%%NODE_ARCH%% npx pkg "${opts[@]}" \
++  PKG_NODE_PATH=%%WRKDIR%%/.pkg-cache/v%%PKG_FETCH_VER%%/built-v%%PKG_NODE_VER%%-freebsd-%%NODE_ARCH%% npx pkg "${opts[@]}" \
 +    --target node$target_node-$node_os \
      --output $target_dist_dir/$package_binary_name$exe_extension
  else
