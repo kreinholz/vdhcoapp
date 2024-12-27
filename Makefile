@@ -98,7 +98,7 @@ post-patch:
 		${WRKSRC}/build.sh
 	@${REINPLACE_CMD} -e 's|%%WRKDIR%%|${WRKDIR}|' \
 		${WRKSRC}/build.sh
-	@${REINPLACE_CMD} -e 's|%%ARCH%%|${ARCH}|' \
+	@${REINPLACE_CMD} -e 's/%%ARCH%%|${ARCH}/g' \
 		${WRKSRC}/filepicker/build.sh
 	@${REINPLACE_CMD} -e 's|amd64-|x86_64-|' \
 		${WRKSRC}/filepicker/build.sh
