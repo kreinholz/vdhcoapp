@@ -85,17 +85,17 @@ post-patch:
 		${WRKSRC}/filepicker/build.sh
 
 pre-build:
-	# Temporary hack to copy pre-built patched node for testing purposes
-	${MKDIR} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}
-	${CP} ${FILESDIR}/built-v18.20.4-freebsd-x64 ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/
-	# build patched node for @yao-pkg (longest part of build)
-#	cd ${WRKDIR}/node-v${PKG_NODE_VER} && \
-#		${SETENV} ${CONFIGURE_ENV} CC=${CC} CXX=${CXX} ./configure ${PKG_NODE_CONFIGURE_ARGS} && \
-#		${SETENV} ${MAKE_ENV} ${MAKE_CMD} -j ${MAKE_JOBS_NUMBER}
+	# Uncomment the following 2 lines, then comment out all 7 lines under #build patched node for @yao-pkg to do rapid testing (requires placing a prebuild patched node binary in the files/ directory):
 #	${MKDIR} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}
-#	${MV} ${WRKDIR}/node-v${PKG_NODE_VER}/out/Release/node \
-#		${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH}
-#	${STRIP_CMD} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH}
+#	${CP} ${FILESDIR}/built-v18.20.4-freebsd-x64 ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/
+	# build patched node for @yao-pkg (longest part of build)
+	cd ${WRKDIR}/node-v${PKG_NODE_VER} && \
+		${SETENV} ${CONFIGURE_ENV} CC=${CC} CXX=${CXX} ./configure ${PKG_NODE_CONFIGURE_ARGS} && \
+		${SETENV} ${MAKE_ENV} ${MAKE_CMD} -j ${MAKE_JOBS_NUMBER}
+	${MKDIR} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}
+	${MV} ${WRKDIR}/node-v${PKG_NODE_VER}/out/Release/node \
+		${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH}
+	${STRIP_CMD} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH}
 	# rebuild node modules against patched node
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ELECTRON_SKIP_BINARY_DOWNLOAD=1 \
 		npm rebuild --nodedir=${WRKDIR}/node-v${PKG_NODE_VER} --verbose
