@@ -24,7 +24,40 @@
    linux-i686 | \
    linux-aarch64 | \
    linux-x86_64 | \
-@@ -168,8 +172,6 @@ filepicker_target=filepicker-$target$exe_extension
+@@ -122,20 +126,6 @@ fi
+   fi
+ fi
+ 
+-if ! [ -x "$(command -v esbuild)" ]; then
+-  log "Installing esbuild"
+-  npm install -g esbuild
+-fi
+-
+-if ! [ -x "$(command -v pkg)" ]; then
+-  log "Installing pkg"
+-  if [ $target_node == 10 ]; then
+-    npm install -g pkg@4.4.9
+-  else
+-    npm install -g pkg
+-  fi
+-fi
+-
+ if [ $target_node == 10 ]; then
+   if [[ $(pkg -v) != 4.4.9 ]]
+   then
+@@ -143,11 +133,6 @@ fi
+   fi
+ fi
+ 
+-if ! [ -x "$(command -v ejs)" ]; then
+-  log "Installing ejs"
+-  npm install -g ejs
+-fi
+-
+ if [ ! -d "app/node_modules" ]; then
+   (cd app/ ; npm install)
+ fi
+@@ -168,8 +153,6 @@ filepicker_target=filepicker-$target$exe_extension
  
  
  filepicker_target=filepicker-$target$exe_extension
@@ -33,7 +66,7 @@
  if [ $target_os == "win7" ]; then
    node_os="windows"
    ffmpeg_target=ffmpeg-$package_ffmpeg_build_version-windows-$target_arch
-@@ -193,6 +195,10 @@ fi
+@@ -193,6 +176,10 @@ fi
  if [ $target == "linux-x86_64" ]; then
    deb_arch="amd64"
  fi
@@ -44,7 +77,16 @@
  
  if [ $publish == 1 ]; then
    files=(
-@@ -328,77 +334,50 @@ if [ ! $skip_bundling == 1 ]; then
+@@ -314,7 +301,7 @@ if [ ! $skip_bundling == 1 ]; then
+       "--define:import.meta.url=_importMetaUrl")
+   fi
+ 
+-  NODE_PATH=app/src:$target_dist_dir esbuild ./app/src/main.js \
++  NODE_PATH=app/src:$target_dist_dir npx esbuild ./app/src/main.js \
+     "${opts[@]}" \
+     --format=cjs \
+     --bundle --platform=node \
+@@ -328,77 +315,50 @@ if [ ! $skip_bundling == 1 ]; then
      declare -a opts=("$dist_dir/bundled.js")
    fi
  
@@ -115,19 +157,21 @@
 -      yq e ".architecture = \"${deb_arch}\"" |\
 -      yq e ".depends = \"ffmpeg\"" |\
 -      yq e ".version = \"${meta_version}\"" > $target_dist_dir/deb/DEBIAN/control
--
-     ejs -f $target_dist_dir/config.json ./assets/linux/prerm.ejs \
--      > $target_dist_dir/deb/DEBIAN/prerm
--    chmod +x $target_dist_dir/deb/DEBIAN/prerm
++    npx ejs -f $target_dist_dir/config.json ./assets/linux/prerm.ejs \
 +      > $target_dist_dir//prerm
 +    chmod +x $target_dist_dir//prerm
  
-     ejs -f $target_dist_dir/config.json ./assets/linux/postinst.ejs \
--      > $target_dist_dir/deb/DEBIAN/postinst
--    chmod +x $target_dist_dir/deb/DEBIAN/postinst
+-    ejs -f $target_dist_dir/config.json ./assets/linux/prerm.ejs \
+-      > $target_dist_dir/deb/DEBIAN/prerm
+-    chmod +x $target_dist_dir/deb/DEBIAN/prerm
++    npx ejs -f $target_dist_dir/config.json ./assets/linux/postinst.ejs \
 +      > $target_dist_dir/postinst
 +    chmod +x $target_dist_dir/postinst
  
+-    ejs -f $target_dist_dir/config.json ./assets/linux/postinst.ejs \
+-      > $target_dist_dir/deb/DEBIAN/postinst
+-    chmod +x $target_dist_dir/deb/DEBIAN/postinst
+-
 -    log "Building noffmpeg.deb file"
 -    dpkg-deb --build $target_dist_dir/deb $target_dist_dir/$out_noffmpeg_deb_file
 -
@@ -138,7 +182,7 @@
        $target_dist_dir/$package_binary_name-$meta_version
      log "Building .tar.bz2 file"
      tar_extra=""
-@@ -407,51 +386,7 @@ if [ ! $skip_packaging == 1 ]; then
+@@ -407,51 +367,7 @@ if [ ! $skip_packaging == 1 ]; then
      fi
      (cd $target_dist_dir && tar -cvjS $tar_extra -f $out_noffmpeg_bz2_file $package_binary_name-$meta_version)
  
