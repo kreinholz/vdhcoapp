@@ -100,9 +100,10 @@ do-build:
 	cd ${WRKSRC} && ./build.sh --skip-packaging --skip-signing --skip-notary --target freebsd-${ARCH}
 
 do-install:
-	# don't strip executable since it causes error
+	# don't strip vdhcoapp executable since it causes error
 	${INSTALL_KLD} ${WRKSRC}/dist/freebsd/${ARCH}/vdhcoapp ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_KLD} ${WRKSRC}/dist/freebsd/${ARCH}/filepicker ${STAGEDIR}${PREFIX}/bin
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/filepicker
 
 do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
