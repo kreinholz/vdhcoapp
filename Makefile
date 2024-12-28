@@ -54,7 +54,8 @@ NODE_ARCH=	${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 post-extract:
 	${CP} -R ${FILESDIR}/packagejsons/* ${WRKSRC}
-	cd ${WRKSRC} && npm ci --ignore-scripts --no-progress --no-audit --no-fund
+	${CP} ${FILESDIR}/packagejsons/app/package-lock.json ${BUILD_WRKSRC}
+	cd ${WRKSRC} && npm install
 
 post-patch:
 	# apply FreeBSD patches for node
