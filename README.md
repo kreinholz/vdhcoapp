@@ -31,5 +31,3 @@ While vdhcoapp is NOT an Electron app, it does share certain features in common 
 Prefetching all required node modules into a single distfile with checksum is a source of pain. Since this port is unofficial, I could either forgo this step (in which case it won't be able to be built with Poudriere), or host the vdhcoapp-2.0.19-node_modules.tar.gz distfile myself.
 
 There are 2 branches of this repository: main, which includes a prefetch file containing node_modules, hosted on my personal github. And no-prefetch, which true to its name, builds the required node_modules on the fly using npm. The latter is probably fine if manually building with 'make install clean'. The former is better if incorporating this into an automated build processing using Poudriere or synth.
-
-If and when I figure out a solution to that problem, I might consider making this repository public.
