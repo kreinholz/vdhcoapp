@@ -58,6 +58,7 @@ post-extract:
 #	${CP} -R ${FILESDIR}/packagejsons/* ${WRKSRC}
 #	cd ${WRKSRC} && npm install
 	${MV} ${WRKDIR}/node_modules ${WRKSRC}
+	${CP} ${FILESDIR}/packagejsons/app/package-lock.json ${BUILD_WRKSRC}
 
 post-patch:
 	# apply FreeBSD patches for node
