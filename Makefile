@@ -53,7 +53,8 @@ PKG_NODE_CONFIGURE_ARGS=--shared-brotli \
 NODE_ARCH=	${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 post-extract:
-	${MV} ${WRKDIR}/node_modules ${WRKSRC}
+	${CP} -R ${FILESDIR}/packagejsons/* ${WRKSRC}
+	cd ${WRKSRC} && npm ci --ignore-scripts --no-progress --no-audit --no-fund
 
 post-patch:
 	# apply FreeBSD patches for node
