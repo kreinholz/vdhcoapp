@@ -1,8 +1,8 @@
-TIMESTAMP = 1735182495
+TIMESTAMP = 1735422016
 SHA256 (node-v18.20.4.tar.gz) = 349259af6821f730bc4ca3a0e6576efc75ba86e546d118629a5b75eb8ebc3a0b
 SIZE (node-v18.20.4.tar.gz) = 85139497
-SHA256 (vdhcoapp-2.0.19-node_modules.tgz) = 5df0f9b89221123cad9934d6e91bb165a2bcc12a06f7e72ab658f34b8c260fab
-SIZE (vdhcoapp-2.0.19-node_modules.tgz) = 9164056
+SHA256 (vdhcoapp-2.0.19-node_modules.tar.gz) = 5423404a4179b6f35ff18c8e4894e42aabd7a8227115530d2c434c1dcc3431d6
+SIZE (vdhcoapp-2.0.19-node_modules.tar.gz) = 8240679
 SHA256 (aclap-dev-vdhcoapp-v2.0.19_GH0.tar.gz) = 2fedba42f5d1f207c92938e99cd3fcf0af351820e88ab0df5fcbf7b68ae51d23
 SIZE (aclap-dev-vdhcoapp-v2.0.19_GH0.tar.gz) = 427152
 SHA256 (paulrouget-static-filepicker-v1.0.1_GH0.tar.gz) = 4e36f9f3acc4cafaedc7c978957a849902f96e423c052945d94576e3edabb385
