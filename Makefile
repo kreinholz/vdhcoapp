@@ -14,6 +14,9 @@ WWW=		https://www.downloadhelper.net
 
 LICENSE=	GPLv2
 
+ONLY_FOR_ARCHS=	aarch64 amd64 armv6 armv7 i386 powerpc64 powerpc64le
+ONLY_FOR_ARCHS_REASON=	supported build targets for www/node18
+
 FETCH_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 BUILD_DEPENDS=	yq:textproc/go-yq \
 		bash:shells/bash \
