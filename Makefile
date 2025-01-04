@@ -24,7 +24,8 @@ BUILD_DEPENDS=	yq:textproc/go-yq \
 		pkg-config:devel/pkgconf \
 		npm:www/npm${NODEJS_SUFFIX}
 
-RUN_DEPENDS=	xdg-open:devel/xdg-utils
+RUN_DEPENDS=	xdg-open:devel/xdg-utils \
+		ffmpeg:multimedia/ffmpeg
 
 LIB_DEPENDS=	libuv.so:devel/libuv \
 		libbrotlidec.so:archivers/brotli \
@@ -54,7 +55,12 @@ PKG_NODE_CONFIGURE_ARGS=--shared-brotli \
 			--shared-cares \
 			--shared-libuv \
 			--shared-nghttp2 \
-			--shared-zlib
+			--shared-zlib \
+			--without-npm \
+			--without-corepack \
+			--without-inspector \
+			--without-intl \
+			--without-dtrace
 NODE_ARCH=	${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 post-extract:
@@ -133,7 +139,7 @@ regenerate-node_modules-distfile: patch
 	# 2. Comment out the third post-extract line and uncomment the first two post-extract lines
 	# 3. Run 'sudo make makesum regenerate-node_modules-distfile clean'
 	# 4. Upload the archive
-	# 5. Reverse the chnages made in steps 1 and 2 above
+	# 5. Reverse the changes made in steps 1 and 2 above
 	# 6. Run 'sudo make makesum' to update distinfo
 	# Based on fox's www/opengist methods and instructions
 
