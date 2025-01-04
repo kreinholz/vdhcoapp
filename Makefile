@@ -17,22 +17,19 @@ LICENSE=	GPLv2
 ONLY_FOR_ARCHS=	aarch64 amd64 armv6 armv7 i386 powerpc64 powerpc64le
 ONLY_FOR_ARCHS_REASON=	supported build targets for www/node18
 
+USES=		nodejs:18,build pkgconfig compiler:c++11-lib gmake localbase python:build shebangfix
+
 FETCH_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 BUILD_DEPENDS=	yq:textproc/go-yq \
 		bash:shells/bash \
 		cargo:lang/rust \
 		pkg-config:devel/pkgconf \
 		npm:www/npm${NODEJS_SUFFIX}
-
-RUN_DEPENDS=	xdg-open:devel/xdg-utils \
-		ffmpeg:multimedia/ffmpeg
-
 LIB_DEPENDS=	libgtk-3.so:x11-toolkits/gtk30 \
 		libglib-2.0.so:devel/glib20
-
+RUN_DEPENDS=	xdg-open:devel/xdg-utils \
+		ffmpeg:multimedia/ffmpeg
 TEST_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
-
-USES=		nodejs:18,build pkgconfig compiler:c++11-lib gmake localbase python:build shebangfix
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	aclap-dev
