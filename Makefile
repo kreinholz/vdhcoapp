@@ -17,15 +17,20 @@ LICENSE=	GPLv2
 ONLY_FOR_ARCHS=	aarch64 amd64 armv6 armv7 i386 powerpc64 powerpc64le
 ONLY_FOR_ARCHS_REASON=	supported build targets for www/node18
 
-USES=		nodejs:18,build cargo pkgconfig gmake localbase:ldflags python:build
+USES=		nodejs:18,build pkgconfig gmake localbase:ldflags python:build
 
 FETCH_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 BUILD_DEPENDS=	yq:textproc/go-yq \
 		bash:shells/bash \
 		pkg-config:devel/pkgconf \
+		cargo:lang/rust \
 		npm:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libgtk-3.so:x11-toolkits/gtk30 \
-		libglib-2.0.so:devel/glib20
+		libglib-2.0.so:devel/glib20 \
+		libbrotlidec.so:archivers/brotli \
+		libuv.so:devel/libuv \
+		libcares.so:dns/c-ares \
+		libnghttp2.so:www/libnghttp2
 RUN_DEPENDS=	xdg-open:devel/xdg-utils \
 		ffmpeg:multimedia/ffmpeg
 TEST_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
@@ -46,7 +51,13 @@ PKG_NODE_CONFIGURE_ARGS=--without-npm \
 			--without-corepack \
 			--without-inspector \
 			--without-intl \
-			--without-dtrace
+			--without-dtrace \
+			--shared-brotli \
+			--shared-cares \
+			--shared-nghttp2 \
+			--shared-zlib \
+			--shared-openssl \
+			--openssl-use-def-ca-store
 NODE_ARCH=	${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 post-extract:
