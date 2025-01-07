@@ -17,7 +17,7 @@ LICENSE=	GPLv2
 ONLY_FOR_ARCHS=	aarch64 amd64 armv6 armv7 i386 powerpc64 powerpc64le
 ONLY_FOR_ARCHS_REASON=	supported build targets for www/node18
 
-USES=		nodejs:18,build cargo pkgconfig compiler:c++11-lib gmake localbase python:build shebangfix
+USES=		nodejs:18,build cargo pkgconfig gmake localbase:ldflags python:build
 
 FETCH_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 BUILD_DEPENDS=	yq:textproc/go-yq \
