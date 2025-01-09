@@ -59,6 +59,7 @@ PKG_NODE_CONFIGURE_ARGS=--without-npm \
 			--shared-openssl \
 			--openssl-use-def-ca-store
 NODE_ARCH=	${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
+RUST_ARCH=	${ARCH:S/amd64/x86_64/:S/i386/i686/}
 
 post-extract:
 #	${CP} -R ${FILESDIR}/packagejsons/* ${WRKSRC}
@@ -85,9 +86,9 @@ post-patch:
 		${WRKSRC}/build.sh
 	@${REINPLACE_CMD} -e 's|%%WRKDIR%%|${WRKDIR}|' \
 		${WRKSRC}/build.sh
-	@${REINPLACE_CMD} -e 's/%%ARCH%%/${ARCH}/g' \
+	@${REINPLACE_CMD} -e 's|%%RUST_ARCH%%|${RUST_ARCH}|' \
 		${WRKSRC}/filepicker/build.sh
-	@${REINPLACE_CMD} -e 's|amd64-|x86_64-|' \
+	@${REINPLACE_CMD} -e 's|%%ARCH%%|${ARCH}|' \
 		${WRKSRC}/filepicker/build.sh
 
 pre-build:

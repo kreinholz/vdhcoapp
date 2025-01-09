@@ -12,8 +12,8 @@
  
 -cargo build --target aarch64-apple-darwin --release
 -cp ./target/aarch64-apple-darwin/release/filepicker dist/filepicker-mac-arm64
-+cargo build --target %%ARCH%%-unknown-freebsd --release
-+cp ./target/%%ARCH%%-unknown-freebsd/release/filepicker dist/filepicker-freebsd-%%ARCH%%
++cargo build --target %%RUST_ARCH%%-unknown-freebsd --release
++cp ./target/%%RUST_ARCH%%-unknown-freebsd/release/filepicker dist/filepicker-freebsd-%%ARCH%%
  
 -cargo build --target x86_64-apple-darwin --release
 -cp ./target/x86_64-apple-darwin/release/filepicker dist/filepicker-mac-x86_64
