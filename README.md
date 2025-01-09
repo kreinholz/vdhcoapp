@@ -22,7 +22,7 @@ Note: this was primarily for educational purposes--to see if I could make it wor
 
 The Linux version of vdhcoapp works quite well on FreeBSD thanks to the Linuxulator. However, this Port makes it possible to build a FreeBSD native version of vdhcoapp and its filepicker component. The 'install' and 'uninstall' scripts bundled into the vdhcoapp binary work as well, so there is no need for the Linux version of vdhcoapp at all.
 
-There are still some problems to solve with this custom Port: I based a lot of my work on the security/bitwarden-cli port as well as the port maintainer, tagattie's, blog post here:
+I based a lot of my work on the security/bitwarden-cli port as well as the port maintainer, tagattie's, blog post here:
 
 https://blog.c6h12o6.org/post/freebsd-electron-app/
 
