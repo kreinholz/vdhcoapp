@@ -14,7 +14,6 @@ Options:
   --user	# force installation in user mode (automatic if run as non-root user)
   --system	# force installation system wide (automatic if run as root user)
 
-In order to use the 'Download and convert to' feature in the browser extension, ffmpeg must be installed on the system. multimedia/ffmpeg is available through either Ports or packages.
 EOM
 }
 ]
