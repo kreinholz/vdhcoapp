@@ -15,9 +15,9 @@ WWW=		https://www.downloadhelper.net
 LICENSE=	GPLv2
 
 ONLY_FOR_ARCHS=	aarch64 amd64 armv6 armv7 i386 powerpc64 powerpc64le
-ONLY_FOR_ARCHS_REASON=	supported build targets for www/node18
+ONLY_FOR_ARCHS_REASON=	supported build targets for www/node22
 
-USES=		nodejs:18,build pkgconfig gmake localbase:ldflags python:build
+USES=		nodejs:22,build pkgconfig gmake localbase:ldflags python:build
 
 FETCH_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 BUILD_DEPENDS=	yq:textproc/go-yq \
@@ -37,7 +37,8 @@ TEST_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	aclap-dev
-GH_TUPLE?=	paulrouget:static-filepicker:v1.0.1:dist/filepicker
+GH_TUPLE?=	paulrouget:static-filepicker:v1.0.1-g9a07cff:dist/filepicker \
+		aclap-dev:vdhcoapp:f8cc614
 
 BUILD_WRKSRC=	${WRKSRC}/app
 
@@ -45,13 +46,12 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-PKG_NODE_VER=	18.20.4
-PKG_FETCH_VER=	3.5
+PKG_NODE_VER=	22.12.0
+PKG_FETCH_VER=	3.5.18
 PKG_NODE_CONFIGURE_ARGS=--without-npm \
 			--without-corepack \
 			--without-inspector \
 			--without-intl \
-			--without-dtrace \
 			--shared-brotli \
 			--shared-cares \
 			--shared-nghttp2 \
@@ -92,7 +92,7 @@ post-patch:
 		${WRKSRC}/filepicker/build.sh
 
 pre-build:
-	# Uncomment the following 2 lines, then comment out all 7 lines under #build patched node for @yao-pkg to do rapid testing (requires placing a prebuild patched node binary in the files/ directory):
+	# Uncomment the following 2 lines, then comment out all 7 lines under #build patched node for @yao-pkg to do rapid testing (requires placing a prebuilt patched node binary in the files/ directory):
 #	${MKDIR} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}
 #	${CP} ${FILESDIR}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/
 	# build patched node for @yao-pkg (longest part of build)

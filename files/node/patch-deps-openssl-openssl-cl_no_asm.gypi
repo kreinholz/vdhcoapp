@@ -1,4 +1,4 @@
---- deps/openssl/openssl-cl_no_asm.gypi.orig	2024-02-13 21:40:45 UTC
+--- deps/openssl/openssl-cl_no_asm.gypi.orig	2023-10-24 10:04:40 UTC
 +++ deps/openssl/openssl-cl_no_asm.gypi
 @@ -1,4 +1,5 @@
  {

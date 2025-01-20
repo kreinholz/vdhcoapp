@@ -1,10 +1,16 @@
---- app/package.json.orig	2024-12-28 22:02:04 UTC
+--- app/package.json.orig	2025-01-20 19:16:24 UTC
 +++ app/package.json
-@@ -5,6 +5,6 @@
-     "fs-extra": "^11.1.1",
-     "got": "^11.8.2",
-     "open": "^9.1.0",
+@@ -2,9 +2,9 @@
+   "dependencies": {
+     "simple-node-logger": "^21.8.12",
+     "base64-js": "^1.5.1",
+-    "fs-extra": "^11.1.1",
+-    "got": "^11.8.2",
+-    "open": "^9.1.0",
 -    "tmp": "0.2.1"
-+    "tmp": "^0.2.1"
++    "fs-extra": "^11.3.0",
++    "got": "^14.4.5",
++    "open": "^10.1.0",
++    "tmp": "0.2.3"
    }
  }

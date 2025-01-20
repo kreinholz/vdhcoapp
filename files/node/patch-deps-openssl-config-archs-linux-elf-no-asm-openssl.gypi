@@ -1,4 +1,4 @@
---- deps/openssl/config/archs/linux-elf/no-asm/openssl.gypi.orig	2023-04-12 04:09:13 UTC
+--- deps/openssl/config/archs/linux-elf/no-asm/openssl.gypi.orig	2023-05-16 06:58:19 UTC
 +++ deps/openssl/config/archs/linux-elf/no-asm/openssl.gypi
 @@ -977,7 +977,7 @@
        '-Wall -O3 -fomit-frame-pointer',

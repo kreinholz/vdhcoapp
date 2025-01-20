@@ -1,4 +1,4 @@
---- build.sh.orig	2024-02-19 06:21:13 UTC
+--- build.sh.orig	2024-10-04 14:48:43 UTC
 +++ build.sh
 @@ -1,4 +1,4 @@
 -#!/bin/bash
@@ -17,6 +17,15 @@
      ;;
    Darwin)
      host_os="mac"
+@@ -45,7 +45,7 @@ skip_notary=0
+ skip_signing=0
+ skip_bundling=0
+ skip_notary=0
+-target_node=18
++target_node=22
+ 
+ while [[ "$#" -gt 0 ]]; do
+   case $1 in
 @@ -75,6 +75,7 @@ case $target in
  done
  
@@ -25,7 +34,15 @@
    linux-i686 | \
    linux-aarch64 | \
    linux-x86_64 | \
-@@ -122,20 +123,6 @@ fi
+@@ -116,26 +117,12 @@ else
+     error "Wrong version of Node (expected v10)"
+   fi
+ else
+-  if [[ $(node -v) != v18.* ]]
++  if [[ $(node -v) != v22.* ]]
+   then
+-    error "Wrong version of Node (expected v18)"
++    error "Wrong version of Node (expected v22)"
    fi
  fi
  
@@ -78,7 +95,7 @@
  
  if [ $publish == 1 ]; then
    files=(
-@@ -314,7 +298,7 @@ if [ ! $skip_bundling == 1 ]; then
+@@ -315,7 +299,7 @@ if [ ! $skip_bundling == 1 ]; then
        "--define:import.meta.url=_importMetaUrl")
    fi
  
@@ -87,7 +104,7 @@
      "${opts[@]}" \
      --format=cjs \
      --bundle --platform=node \
-@@ -329,35 +313,21 @@ if [ ! $skip_bundling == 1 ]; then
+@@ -330,35 +314,21 @@ if [ ! $skip_bundling == 1 ]; then
    fi
  
    log "Bundling Node binary with code"

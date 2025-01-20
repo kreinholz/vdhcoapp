@@ -1,4 +1,4 @@
---- filepicker/build.sh.orig	2024-02-08 11:59:15 UTC
+--- filepicker/build.sh.orig	2024-03-08 05:28:24 UTC
 +++ filepicker/build.sh
 @@ -1,4 +1,4 @@
 -#!/bin/bash
@@ -12,8 +12,8 @@
  
 -cargo build --target aarch64-apple-darwin --release
 -cp ./target/aarch64-apple-darwin/release/filepicker dist/filepicker-mac-arm64
-+cargo build --target %%RUST_ARCH%%-unknown-freebsd --release
-+cp ./target/%%RUST_ARCH%%-unknown-freebsd/release/filepicker dist/filepicker-freebsd-%%ARCH%%
++cargo build --target x86_64-unknown-freebsd --release
++cp ./target/x86_64-unknown-freebsd/release/filepicker dist/filepicker-freebsd-amd64
  
 -cargo build --target x86_64-apple-darwin --release
 -cp ./target/x86_64-apple-darwin/release/filepicker dist/filepicker-mac-x86_64

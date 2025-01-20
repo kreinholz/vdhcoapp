@@ -16,20 +16,20 @@
     "apps/*"
   ],
   "devDependencies": {
-    "@yao-pkg/pkg": "5.16.1",
-    "ejs": "^3.1.9",
-    "esbuild": "^0.21.0"
+    "@yao-pkg/pkg": "^6.2.0",
+    "ejs": "^3.1.10",
+    "esbuild": "^0.24.2"
   },
   "dependencies": {
     "simple-node-logger": "^21.8.12",
     "base64-js": "^1.5.1",
-    "fs-extra": "^11.1.1",
-    "got": "^11.8.2",
-    "open": "^9.1.0",
-    "tmp": "^0.2.1"
+    "fs-extra": "^11.3.0",
+    "got": "^14.4.5",
+    "open": "^10.1.0",
+    "tmp": "^0.2.3"
   },
   "engines": {
-    "node": "~18",
+    "node": "~22",
     "npm": "~10"
   }
 }
