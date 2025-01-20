@@ -92,7 +92,7 @@ post-patch:
 		${WRKSRC}/filepicker/build.sh
 
 pre-build:
-	# Uncomment the following 2 lines, then comment out all 7 lines under #build patched node for @yao-pkg to do rapid testing (requires placing a prebuild patched node binary in the files/ directory):
+	# Uncomment the following 2 lines, then comment out all 7 lines under #build patched node for @yao-pkg to do rapid testing (requires placing a prebuilt patched node binary in the files/ directory):
 #	${MKDIR} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}
 #	${CP} ${FILESDIR}/built-v${PKG_NODE_VER}-freebsd-${NODE_ARCH} ${WRKDIR}/.pkg-cache/v${PKG_FETCH_VER}/
 	# build patched node for @yao-pkg (longest part of build)
