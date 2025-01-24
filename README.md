@@ -1,3 +1,5 @@
+NOTE: this is a non-working experiment to bump vdhcoapp's node_modules to the current versions (primarily impacts got and open), and to build/bundle with node22 instead of node18. While it does indeed build, and the install and uninstall functionality of the resulting vdhcoapp binary works, it does not correctly interface with the Video DownloadHelper browser extension.
+
 # Unofficial/custom FreeBSD Port of Video DownloadHelper's Companion App
 
 Video DownloadHelper is a popular web browser add-on/extension that, well, helps download videos from the web.

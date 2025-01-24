@@ -1,0 +1,12 @@
+--- config.toml.orig	2025-01-23 20:39:14 UTC
++++ config.toml
+@@ -94,9 +94,6 @@ regs = [ "Software\\Microsoft\\Edge\\NativeMessagingHo
+ [store.microsoft.msg_manifest_paths.windows]
+ regs = [ "Software\\Microsoft\\Edge\\NativeMessagingHosts\\" ]
+ 
+-[store.yandex.msg_manifest_paths.windows]
+-regs = [ "Software\\Yandex\\YandexBrowser\\NativeMessagingHosts", "Software\\YandexBrowser\\NativeMessagingHosts" ]
+-
+ ### MOZILLA MAC USER ###
+ 
+ [[store.mozilla.msg_manifest_paths.mac.user]]
