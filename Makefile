@@ -37,7 +37,8 @@ TEST_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	aclap-dev
-GH_TUPLE?=	paulrouget:static-filepicker:v1.0.1:dist/filepicker
+GH_TUPLE?=	paulrouget:static-filepicker:v1.0.1:dist/filepicker \
+		aclap-dev:vdhcoapp:f8cc614
 
 BUILD_WRKSRC=	${WRKSRC}/app
 

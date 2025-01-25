@@ -1,0 +1,41 @@
+--- config.toml.orig	2025-01-24 22:48:40 UTC
++++ config.toml
+@@ -94,9 +94,6 @@ regs = [ "Software\\Microsoft\\Edge\\NativeMessagingHo
+ [store.microsoft.msg_manifest_paths.windows]
+ regs = [ "Software\\Microsoft\\Edge\\NativeMessagingHosts\\" ]
+ 
+-[store.yandex.msg_manifest_paths.windows]
+-regs = [ "Software\\Yandex\\YandexBrowser\\NativeMessagingHosts", "Software\\YandexBrowser\\NativeMessagingHosts" ]
+-
+ ### MOZILLA MAC USER ###
+ 
+ [[store.mozilla.msg_manifest_paths.mac.user]]
+@@ -191,18 +188,19 @@ only_if_dir_exists = "/Library/Microsoft/Edge/"
+ 
+ ### LIBREWOLF LINUX USER ###
+ 
+-[store.librewolf.msg_manifest_paths.linux]
+-user = [
+-  "~/.librewolf/native-messaging-hosts"
+-]
++[[store.librewolf.msg_manifest_paths.linux.user]]
++path = "~/.librewolf/native-messaging-hosts"
++only_if_dir_exists = "~/.librewolf/"
+ 
+ ### MOZILLA LINUX USER ###
+ 
+-[store.mozilla.msg_manifest_paths.linux]
+-user = [
+-  "~/.mozilla/native-messaging-hosts/",
+-  "~/.var/app/org.mozilla.firefox/.mozilla/native-messaging-hosts"
+-]
++[[store.mozilla.msg_manifest_paths.linux.user]]
++path = "~/.mozilla/native-messaging-hosts/"
++only_if_dir_exists = "~/.mozilla/"
++
++[[store.mozilla.msg_manifest_paths.linux.user]]
++path = "~/.var/app/org.mozilla.firefox/.mozilla/native-messaging-hosts"
++only_if_dir_exists = "~/.var/app/org.mozilla.firefox/"
+ 
+ ### MOZILLA LINUX SYSTEM ###
+ 
