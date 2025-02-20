@@ -16,7 +16,7 @@
     "apps/*"
   ],
   "devDependencies": {
-    "@yao-pkg/pkg": "5.16.1",
+    "@yao-pkg/pkg": "^6.3.1",
     "ejs": "^3.1.9",
     "esbuild": "^0.25.0"
   },

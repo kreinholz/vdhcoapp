@@ -1,6 +1,7 @@
 PORTNAME=	vdhcoapp
 DISTVERSIONPREFIX=	v
 DISTVERSION=	2.0.19
+PORTREVISION?=	1
 CATEGORIES=	www
 MASTER_SITES=	https://github.com/aclap-dev/vdhcoapp/ \
 		https://nodejs.org/dist/v${PKG_NODE_VER}/:node \
@@ -46,7 +47,7 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-PKG_NODE_VER=	18.20.4
+PKG_NODE_VER=	18.20.6
 PKG_FETCH_VER=	3.5
 PKG_NODE_CONFIGURE_ARGS=--without-npm \
 			--without-corepack \
