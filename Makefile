@@ -1,7 +1,7 @@
 PORTNAME=	vdhcoapp
 DISTVERSIONPREFIX=	v
 DISTVERSION=	2.0.19
-PORTREVISION?=	1
+PORTREVISION?=	2
 CATEGORIES=	www
 MASTER_SITES=	https://github.com/aclap-dev/vdhcoapp/ \
 		https://nodejs.org/dist/v${PKG_NODE_VER}/:node \
@@ -47,7 +47,7 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-PKG_NODE_VER=	18.20.6
+PKG_NODE_VER=	18.20.7
 PKG_FETCH_VER=	3.5
 PKG_NODE_CONFIGURE_ARGS=--without-npm \
 			--without-corepack \
@@ -76,7 +76,7 @@ post-patch:
 	done
 	# apply node patch from pkg-fetch
 	${PATCH} -s -p1 -d ${WRKDIR}/node-v${PKG_NODE_VER} < \
-		${WRKSRC}/node_modules/@yao-pkg/pkg-fetch/patches/node.v${PKG_NODE_VER}.cpp.patch
+		${FILESDIR}/node.v${PKG_NODE_VER}.cpp.patch
 	# Apply substitutions to avoid hardcoding architecture in build scripts
 	@${REINPLACE_CMD} -e 's|%%ARCH%%|${ARCH}|' \
 		${WRKSRC}/build.sh
