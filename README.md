@@ -29,3 +29,15 @@ https://blog.c6h12o6.org/post/freebsd-electron-app/
 While vdhcoapp is NOT an Electron app, it does share certain features in common with one, which made the above invaluable in figuring out how to compile the bundled Node.js sources into a single executable application.
 
 I've tested building for amd64 and i386. It should also build on both 32 and 64-bit ARM, as well as 64-bit PPC, but I haven't tested building for those platforms.
+
+Note: as of 3 September 2025, www/node18 and www/npm-node18 have been removed from the FreeBSD Ports collection. It is necessary to install these from archived versions of their port folders, which can be found at:
+
+https://github.com/freebsd/freebsd-ports/tree/7e25d976c77ccb29c4af06f676d78533848b4c95/www/node18
+
+And:
+
+https://github.com/freebsd/freebsd-ports/tree/7e25d976c77ccb29c4af06f676d78533848b4c95/www/npm-node18
+
+You will want to modify the Makefile for npm-node18 to remove USES= and instead make a RUN_DEPENDS= on node:www/node18, since node18 has been removed from /usr/ports/Mk/Uses/nodejs.mk as well. (Alternatively, you can add '18' back into the list of _VALID_NODEJS_VERSIONS=
+
+Hopefully this workaround will not be necessary for long--vdhcoapp is supposedly getting an update soon...hopefully one that moves to a non-deprecated version of node.

@@ -1,7 +1,7 @@
 PORTNAME=	vdhcoapp
 DISTVERSIONPREFIX=	v
 DISTVERSION=	2.0.19
-PORTREVISION?=	4
+PORTREVISION?=	5
 CATEGORIES=	www
 MASTER_SITES=	https://github.com/aclap-dev/vdhcoapp/ \
 		https://nodejs.org/dist/v${PKG_NODE_VER}/:node \
@@ -18,14 +18,15 @@ LICENSE=	GPLv2
 ONLY_FOR_ARCHS=	aarch64 amd64 armv6 armv7 i386 powerpc64 powerpc64le
 ONLY_FOR_ARCHS_REASON=	supported build targets for www/node18
 
-USES=		nodejs:18,build pkgconfig gmake localbase:ldflags python:build
+USES=		pkgconfig gmake localbase:ldflags python:build
 
-FETCH_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
+FETCH_DEPENDS=	npm:www/npm-node18
 BUILD_DEPENDS=	yq:textproc/go-yq \
 		bash:shells/bash \
 		pkg-config:devel/pkgconf \
 		cargo:lang/rust \
-		npm:www/npm${NODEJS_SUFFIX}
+		node:www/node18 \
+		npm:www/npm-node18
 LIB_DEPENDS=	libgtk-3.so:x11-toolkits/gtk30 \
 		libglib-2.0.so:devel/glib20 \
 		libbrotlidec.so:archivers/brotli \
@@ -34,7 +35,7 @@ LIB_DEPENDS=	libgtk-3.so:x11-toolkits/gtk30 \
 		libnghttp2.so:www/libnghttp2
 RUN_DEPENDS=	xdg-open:devel/xdg-utils \
 		ffmpeg:multimedia/ffmpeg
-TEST_DEPENDS=	npm:www/npm${NODEJS_SUFFIX}
+TEST_DEPENDS=	npm:www/npm-node18
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	aclap-dev
