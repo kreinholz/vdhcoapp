@@ -1,7 +1,7 @@
 PORTNAME=	vdhcoapp
 DISTVERSIONPREFIX=	v
 DISTVERSION=	2.0.19
-PORTREVISION?=	5
+PORTREVISION?=	6
 CATEGORIES=	www
 MASTER_SITES=	https://github.com/aclap-dev/vdhcoapp/ \
 		https://nodejs.org/dist/v${PKG_NODE_VER}/:node \
@@ -18,7 +18,11 @@ LICENSE=	GPLv2
 ONLY_FOR_ARCHS=	aarch64 amd64 armv6 armv7 i386 powerpc64 powerpc64le
 ONLY_FOR_ARCHS_REASON=	supported build targets for www/node18
 
-USES=		pkgconfig gmake localbase:ldflags python:build
+USES=		cargo pkgconfig gmake localbase:ldflags python:build
+
+CARGO_CRATES=   rfd-0.13.0 \
+                clap-3.0.0 \
+                homedir-0.2.1
 
 FETCH_DEPENDS=	npm:www/npm-node18
 BUILD_DEPENDS=	yq:textproc/go-yq \

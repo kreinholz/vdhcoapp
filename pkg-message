@@ -1,6 +1,8 @@
 [
 { type: install
   message: <<EOM
+VDH CoApp is not being developed anymore - VDH v10 doesn't require a companion. After updating the Video DownloadHelper browser extension, the vdhcoapp package can safely be deleted.
+
 The Video DownloadHelper Companion App has been installed on your machine. However, it still needs to be registered before the Video DownloadHelper browser extension can use it.
 
 Commands:

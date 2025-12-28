@@ -1,8 +1,14 @@
-TIMESTAMP = 1757002705
+TIMESTAMP = 1766958512
 SHA256 (node-v18.20.8.tar.gz) = ec60a6d2344ef9e1f093991ca1bb6bbe92c61c29d1762c4b99e08f87dbb91e2f
 SIZE (node-v18.20.8.tar.gz) = 86321906
 SHA256 (vdhcoapp-2.0.19-node_modules.tar.gz) = e4419666c2556e1df4d1d2712acee7ae711f978c173e3d9bf9474233129a09ff
 SIZE (vdhcoapp-2.0.19-node_modules.tar.gz) = 9105272
+SHA256 (rust/crates/rfd-0.13.0.crate) = c0d8ab342bcc5436e04d3a4c1e09e17d74958bfaddf8d5fad6f85607df0f994f
+SIZE (rust/crates/rfd-0.13.0.crate) = 49679
+SHA256 (rust/crates/clap-3.0.0.crate) = d17bf219fcd37199b9a29e00ba65dfb8cd5b2688b7297ec14ff829c40ac50ca9
+SIZE (rust/crates/clap-3.0.0.crate) = 189026
+SHA256 (rust/crates/homedir-0.2.1.crate) = 22074da8bba2ef26fc1737ae6c777b5baab5524c2dc403b5c6a76166766ccda5
+SIZE (rust/crates/homedir-0.2.1.crate) = 11926
 SHA256 (aclap-dev-vdhcoapp-v2.0.19-f8cc614_GH0.tar.gz) = 6e3a5e047c8aee4f3bd66973fecbae247e0c6d99d38a4a9126dc93709f5dded1
 SIZE (aclap-dev-vdhcoapp-v2.0.19-f8cc614_GH0.tar.gz) = 378560
 SHA256 (paulrouget-static-filepicker-v1.0.1_GH0.tar.gz) = 4e36f9f3acc4cafaedc7c978957a849902f96e423c052945d94576e3edabb385
